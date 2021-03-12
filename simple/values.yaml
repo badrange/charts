@@ -83,7 +83,8 @@ ingress:
     # staticIpAddressName: null
 
 # Infrastructure related settings.
-cluster: 
+cluster:
+  type: gke
   vpcNative: false
 
 # backendConfig customizations for main service
@@ -124,6 +125,13 @@ nginx:
   # Robots txt file blocked by default
   robotsTxt:
     allow: false
+
+  # Security headers
+  # includeSubdomains should be used whenever possible, but before enabling it needs to be made sure there are no subdomains not using https:
+  hsts_include_subdomains: ""
+  #hsts_include_subdomains: " includeSubDomains;"
+  #content_security_policy: "upgrade-insecure-requests; default-src https: data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self'; base-uri 'self'; object-src 'self'; connect-src wss: https:"
+
 
   # Extra configuration block in server context. 
   serverExtraConfig: |
